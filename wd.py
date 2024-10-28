@@ -15,7 +15,7 @@ clear()
 wordlists = []
 
 while True:
-    url = input("URL | (s)ee saved url's / (d)delete url / (st)art / (e)xit: ")
+    url = input("URL | (s)ee saved url's / (d)delete url / (st)art / (sa)ve URL's / (r)ead URL file / (e)xit: ")
     url = url.lower()
     url = url.strip()
 
@@ -56,6 +56,32 @@ while True:
                 print(f"Error...")
                 print(err)
                 continue
+
+    elif (url == "r"):
+        clear()
+
+        try:
+            archive = open(input("Archive: "), "r+")
+            
+            for url in archive.readlines():
+                url = url.strip()
+                print(url)
+                print(f"{url} added...")
+                wordlists.append(url)
+
+        except:
+            print("Archive not found!")
+
+    elif (url == "sa"):
+        clear()
+        finalText = ""
+
+        for url in wordlists:
+            finalText = f"{finalText}\n{url}".strip()
+            archive = open("WD-urls.txt", "w+")
+            archive.write(finalText)
+
+            print(f"Saving {url}...")
 
     elif (url == "e"):
         break
